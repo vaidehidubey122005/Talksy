@@ -76,7 +76,7 @@ npm run dev
  ✔️ Message seen / delivered status
  👥 Group chat functionality
  🔔 Notifications
- 🌐 Deployment (Vercel + Render)
+
 
  👩‍💻 Author
 
