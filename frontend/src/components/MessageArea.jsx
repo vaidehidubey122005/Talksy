@@ -12,6 +12,7 @@ import ReceiverMessage from './ReceiverMessage';
 import axios from 'axios';
 import { serverUrl } from '../main';
 import { setMessages } from '../redux/messageSlice';
+import { APP_NAME, APP_TAGLINE } from '../constants/branding';
 function MessageArea() {
   let {selectedUser,userData,socket}=useSelector(state=>state.user)
   let dispatch=useDispatch()
@@ -58,21 +59,21 @@ return ()=>socket?.off("newMessage")
 },[messages,setMessages])
  
   return (
-    <div className={`lg:w-[70%] relative   ${selectedUser?"flex":"hidden"} lg:flex  w-full h-full bg-slate-200 border-l-2 border-gray-300 overflow-hidden`}>
+    <div className={`lg:w-[68%] relative ${selectedUser?"flex":"hidden"} lg:flex w-full h-full bg-[#0F172A] overflow-hidden`}>
       
 {selectedUser && 
-<div className='w-full h-[100vh] flex flex-col overflow-hidden gap-[20px] items-center'>
-<div className='w-full h-[100px] bg-[#1797c2] rounded-b-[30px] shadow-gray-400 shadow-lg gap-[20px] flex items-center px-[20px] '>
+<div className='w-full h-[100vh] flex flex-col overflow-hidden gap-[16px] items-center'>
+<div className='w-full h-[92px] bg-slate-900 shadow-lg gap-[20px] flex items-center px-[20px] border-b border-slate-700'>
            <div className='cursor-pointer' onClick={()=>dispatch(setSelectedUser(null))}>
                   <IoIosArrowRoundBack className='w-[40px] h-[40px] text-white'/>
            </div>
-         <div className='w-[50px] h-[50px] rounded-full overflow-hidden flex justify-center items-center bg-white cursor-pointer shadow-gray-500 shadow-lg' >
+         <div className='w-[50px] h-[50px] rounded-full overflow-hidden flex justify-center items-center bg-slate-800 cursor-pointer shadow-lg' >
         <img src={ selectedUser?.image || dp} alt="" className='h-[100%]'/>
         </div>
         <h1 className='text-white font-semibold text-[20px]'>{selectedUser?.name || "user"}</h1>
     </div>
 
-    <div className='w-full h-[70%] flex flex-col py-[30px]  px-[20px] overflow-auto gap-[20px] '>
+    <div className='w-full h-[70%] flex flex-col py-[20px] px-[20px] overflow-auto gap-[18px]'>
 
 {showPicker && <div className='absolute bottom-[120px] left-[20px]'><EmojiPicker width={250} height={350} className='shadow-lg z-[100]' onEmojiClick={onEmojiClick}/></div> }
 
@@ -84,28 +85,28 @@ return ()=>socket?.off("newMessage")
     </div>
     </div> 
     }
-{selectedUser && <div className='w-full lg:w-[70%] h-[100px] fixed bottom-[20px] flex items-center justify-center '>
-      <img src={frontendImage} alt="" className='w-[80px] absolute bottom-[100px] right-[20%] rounded-lg shadow-gray-400 shadow-lg'/>
-     <form className='w-[95%] lg:w-[70%] h-[60px] bg-[rgb(23,151,194)] shadow-gray-400 shadow-lg rounded-full flex items-center gap-[20px] px-[20px] relative' onSubmit={handleSendMessage}>
+{selectedUser && <div className='w-full lg:w-[68%] h-[100px] fixed bottom-[10px] flex items-center justify-center px-2'>
+      <img src={frontendImage} alt="" className='w-[80px] absolute bottom-[88px] right-[20%] rounded-lg shadow-lg'/>
+     <form className='w-[98%] lg:w-[95%] h-[60px] bg-slate-900 border border-slate-700 shadow-lg rounded-[16px] flex items-center gap-[16px] px-[16px] relative' onSubmit={handleSendMessage}>
       
        <div onClick={()=>setShowPicker(prev=>!prev)}>
-       <RiEmojiStickerLine  className='w-[25px] h-[25px] text-white cursor-pointer'/>
+       <RiEmojiStickerLine  className='w-[25px] h-[25px] text-slate-100 cursor-pointer'/>
        </div>
        <input type="file" accept="image/*" ref={image} hidden onChange={handleImage}/>
-       <input type="text" className='w-full h-full px-[10px] outline-none border-0 text-[19px] text-white bg-transparent placeholder-white' placeholder='Message' onChange={(e)=>setInput(e.target.value)} value={input}/>
+       <input type="text" className='w-full h-full px-[10px] outline-none border-0 text-[18px] text-slate-100 bg-transparent placeholder:text-slate-400' placeholder='Message' onChange={(e)=>setInput(e.target.value)} value={input}/>
 <div onClick={()=>image.current.click()}>
-<FaImages className='w-[25px] h-[25px] cursor-pointer text-white'/>
+<FaImages className='w-[25px] h-[25px] cursor-pointer text-slate-100'/>
 </div>
 {(input.length>0  ||  backendImage!=null) && (<button>
-<RiSendPlane2Fill className='w-[25px] cursor-pointer h-[25px] text-white'/>
+<RiSendPlane2Fill className='w-[25px] cursor-pointer h-[25px] text-[#22C55E]'/>
 </button>)}
 
      </form>
      </div>}
     {!selectedUser && 
-    <div className='w-full h-full flex flex-col justify-center items-center'>
-    <h1 className='text-gray-700 font-bold text-[50px]'>Welcome to Chatly</h1>
-    <span className='text-gray-700 font-semibold text-[30px]'>Chat Friendly !</span>
+    <div className='w-full h-full flex flex-col justify-center items-center text-center px-4'>
+    <h1 className='text-slate-100 font-bold text-[46px]'>Welcome to {APP_NAME}</h1>
+    <span className='text-slate-400 font-semibold text-[24px]'>{APP_TAGLINE}!</span>
       </div>}
     
 
