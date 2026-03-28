@@ -85,6 +85,6 @@ npm run dev
 🔗 https://github.com/vaidehidubey122005
 
 
- ⭐ Show your support
+⭐ Show your support
 
 If you like this project, consider giving it a ⭐ on GitHub!
